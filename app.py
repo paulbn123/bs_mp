@@ -117,7 +117,7 @@ if not st.session_state.file_uploaded:
             
             if df is None:
                 st.error("❌ Could not read the CSV file with any supported encoding")
-                with st.expander("🔍 Detailed Error Messages", expanded=True):
+                with st.expander("🔍 Detailed Error Messages", expanded=False):
                     for msg in error_messages:
                         st.write(f"• {msg}")
                 
@@ -228,7 +228,7 @@ if st.session_state.file_uploaded and st.session_state.df is not None:
         st.write(df.dtypes)
 
     # Store filters in sidebar expander
-    with st.sidebar.expander("🏪 Store Filters", expanded=True):  # Changed to True
+    with st.sidebar.expander("🏪 Store Filters", expanded=False):  
 
         # Operator filter (before entity filter)
         st.subheader("Operator")
@@ -324,7 +324,7 @@ if st.session_state.file_uploaded and st.session_state.df is not None:
     
 
     # Location filters in sidebar expander
-    with st.sidebar.expander("🌍 Location Filters", expanded=True):  # Changed to True
+    with st.sidebar.expander("🌍 Location Filters", expanded=False):  
         # Country filter - depends on operator and entity selection
         st.subheader("Country")
         
