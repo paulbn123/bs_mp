@@ -44,10 +44,28 @@ footer {visibility: hidden;}
 # Hide the header (including GitHub, Share, etc.) - Modified to not affect sidebar
 st.markdown("""
 <style>
+/* Hide header elements but preserve sidebar */
 header[data-testid="stHeader"] {visibility: hidden;}
-/* Ensure sidebar is always visible */
-.css-1d391kg {visibility: visible !important;}
-section[data-testid="stSidebar"] {visibility: visible !important;}
+
+/* Ensure sidebar is always visible - multiple selectors for different Streamlit versions */
+.css-1d391kg {visibility: visible !important; display: block !important;}
+section[data-testid="stSidebar"] {visibility: visible !important; display: block !important;}
+.css-1lcbmhc {visibility: visible !important; display: block !important;}
+.css-17eq0hr {visibility: visible !important; display: block !important;}
+div[data-testid="stSidebar"] {visibility: visible !important; display: block !important;}
+
+/* Force sidebar visibility with higher specificity */
+.stApp > div > div > section[data-testid="stSidebar"] {
+    visibility: visible !important;
+    display: block !important;
+    opacity: 1 !important;
+}
+
+/* Additional fallback for sidebar visibility */
+[data-testid="stSidebar"] > div {
+    visibility: visible !important;
+    display: block !important;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -99,7 +117,7 @@ if not st.session_state.file_uploaded:
             
             if df is None:
                 st.error("❌ Could not read the CSV file with any supported encoding")
-                with st.expander("🔍 Detailed Error Messages", expanded=False):
+                with st.expander("🔍 Detailed Error Messages", expanded=True):
                     for msg in error_messages:
                         st.write(f"• {msg}")
                 
@@ -210,7 +228,7 @@ if st.session_state.file_uploaded and st.session_state.df is not None:
         st.write(df.dtypes)
 
     # Store filters in sidebar expander
-    with st.sidebar.expander("🏪 Store Filters", expanded=False): 
+    with st.sidebar.expander("🏪 Store Filters", expanded=True):  # Changed to True
 
         # Operator filter (before entity filter)
         st.subheader("Operator")
@@ -306,7 +324,7 @@ if st.session_state.file_uploaded and st.session_state.df is not None:
     
 
     # Location filters in sidebar expander
-    with st.sidebar.expander("🌍 Location Filters", expanded=False):  
+    with st.sidebar.expander("🌍 Location Filters", expanded=True):  # Changed to True
         # Country filter - depends on operator and entity selection
         st.subheader("Country")
         
