@@ -27,47 +27,47 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# Hide the main menu (hamburger menu)
-st.markdown("""
-<style>
-#MainMenu {visibility: hidden;}
-</style>
-""", unsafe_allow_html=True)
+# # Hide the main menu (hamburger menu)
+# st.markdown("""
+# <style>
+# #MainMenu {visibility: hidden;}
+# </style>
+# """, unsafe_allow_html=True)
 
-# Hide the footer
-st.markdown("""
-<style>
-footer {visibility: hidden;}
-</style>
-""", unsafe_allow_html=True)
+# # Hide the footer
+# st.markdown("""
+# <style>
+# footer {visibility: hidden;}
+# </style>
+# """, unsafe_allow_html=True)
 
-# Hide the header (including GitHub, Share, etc.) - Modified to not affect sidebar
+# # Hide the header (including GitHub, Share, etc.) - Modified to not affect sidebar
 # st.markdown("""
 # <style>
 # /* Hide header elements but preserve sidebar */
 # header[data-testid="stHeader"] {visibility: hidden;}
 
-/* Ensure sidebar is always visible - multiple selectors for different Streamlit versions */
-.css-1d391kg {visibility: visible !important; display: block !important;}
-section[data-testid="stSidebar"] {visibility: visible !important; display: block !important;}
-.css-1lcbmhc {visibility: visible !important; display: block !important;}
-.css-17eq0hr {visibility: visible !important; display: block !important;}
-div[data-testid="stSidebar"] {visibility: visible !important; display: block !important;}
+# /* Ensure sidebar is always visible - multiple selectors for different Streamlit versions */
+# .css-1d391kg {visibility: visible !important; display: block !important;}
+# section[data-testid="stSidebar"] {visibility: visible !important; display: block !important;}
+# .css-1lcbmhc {visibility: visible !important; display: block !important;}
+# .css-17eq0hr {visibility: visible !important; display: block !important;}
+# div[data-testid="stSidebar"] {visibility: visible !important; display: block !important;}
 
-/* Force sidebar visibility with higher specificity */
-.stApp > div > div > section[data-testid="stSidebar"] {
-    visibility: visible !important;
-    display: block !important;
-    opacity: 1 !important;
-}
+# /* Force sidebar visibility with higher specificity */
+# .stApp > div > div > section[data-testid="stSidebar"] {
+#     visibility: visible !important;
+#     display: block !important;
+#     opacity: 1 !important;
+# }
 
-/* Additional fallback for sidebar visibility */
-[data-testid="stSidebar"] > div {
-    visibility: visible !important;
-    display: block !important;
-}
-</style>
-""", unsafe_allow_html=True)
+# /* Additional fallback for sidebar visibility */
+# [data-testid="stSidebar"] > div {
+#     visibility: visible !important;
+#     display: block !important;
+# }
+# </style>
+# """, unsafe_allow_html=True)
 
 
 # Title
