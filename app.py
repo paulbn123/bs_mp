@@ -8,7 +8,8 @@ import numpy as np
 # Set page config
 st.set_page_config(page_title="Portfolio Dashboard", 
                    layout="wide",
-                   page_icon="🔓")  # Unlocked padlock emoji
+                   page_icon="🔓",  # Unlocked padlock emoji
+                   initial_sidebar_state="expanded")  # Make sure sidebar is expanded
 
 # Add custom CSS to reduce gap between top of page and title
 st.markdown("""
@@ -40,10 +41,13 @@ footer {visibility: hidden;}
 </style>
 """, unsafe_allow_html=True)
 
-# Hide the header (including GitHub, Share, etc.)
+# Hide the header (including GitHub, Share, etc.) - Modified to not affect sidebar
 st.markdown("""
 <style>
 header[data-testid="stHeader"] {visibility: hidden;}
+/* Ensure sidebar is always visible */
+.css-1d391kg {visibility: visible !important;}
+section[data-testid="stSidebar"] {visibility: visible !important;}
 </style>
 """, unsafe_allow_html=True)
 
@@ -95,7 +99,7 @@ if not st.session_state.file_uploaded:
             
             if df is None:
                 st.error("❌ Could not read the CSV file with any supported encoding")
-                with st.expander("🔍 Detailed Error Messages", expanded=True):
+                with st.expander("🔍 Detailed Error Messages", expanded=False):
                     for msg in error_messages:
                         st.write(f"• {msg}")
                 
@@ -206,7 +210,7 @@ if st.session_state.file_uploaded and st.session_state.df is not None:
         st.write(df.dtypes)
 
     # Store filters in sidebar expander
-    with st.sidebar.expander("🏪 Store Filters", expanded=False):
+    with st.sidebar.expander("🏪 Store Filters", expanded=False): 
 
         # Operator filter (before entity filter)
         st.subheader("Operator")
@@ -302,13 +306,24 @@ if st.session_state.file_uploaded and st.session_state.df is not None:
     
 
     # Location filters in sidebar expander
-    with st.sidebar.expander("🌍 Location Filters", expanded=False):
-        # Country filter
+    with st.sidebar.expander("🌍 Location Filters", expanded=False):  
+        # Country filter - depends on operator and entity selection
         st.subheader("Country")
-        countries = ['All'] + sorted(df['country'].unique().tolist())
+        
+        # Filter countries based on operator and entity selection
+        country_filter_df = df.copy()
+        
+        if selected_operator != 'All':
+            country_filter_df = country_filter_df[country_filter_df['operator_name'] == selected_operator]
+        
+        if selected_entity != 'All':
+            country_filter_df = country_filter_df[country_filter_df['entity'] == selected_entity]
+        
+        available_countries = country_filter_df['country'].unique().tolist()
+        countries = ['All'] + sorted(available_countries)
         selected_country = st.radio("Select Country:", countries, key="country_radio")
         
-        # City filter - depends on both country and operator selection
+        # City filter - depends on country, operator, and entity selection
         st.subheader("City")
         
         # Filter cities based on country, operator, and entity selection
