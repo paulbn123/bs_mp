@@ -42,10 +42,10 @@ footer {visibility: hidden;}
 """, unsafe_allow_html=True)
 
 # Hide the header (including GitHub, Share, etc.) - Modified to not affect sidebar
-st.markdown("""
-<style>
-/* Hide header elements but preserve sidebar */
-header[data-testid="stHeader"] {visibility: hidden;}
+# st.markdown("""
+# <style>
+# /* Hide header elements but preserve sidebar */
+# header[data-testid="stHeader"] {visibility: hidden;}
 
 /* Ensure sidebar is always visible - multiple selectors for different Streamlit versions */
 .css-1d391kg {visibility: visible !important; display: block !important;}
