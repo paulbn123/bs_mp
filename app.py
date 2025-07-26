@@ -6,7 +6,9 @@ import numpy as np
 
 
 # Set page config
-st.set_page_config(page_title="Store Map Dashboard", layout="wide")
+st.set_page_config(page_title="Portfolio Dashboard", 
+                   layout="wide",
+                   page_icon="🔓")  # Unlocked padlock emoji
 
 # Add custom CSS to reduce gap between top of page and title
 st.markdown("""
@@ -23,6 +25,28 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
+
+# Hide the main menu (hamburger menu)
+st.markdown("""
+<style>
+#MainMenu {visibility: hidden;}
+</style>
+""", unsafe_allow_html=True)
+
+# Hide the footer
+st.markdown("""
+<style>
+footer {visibility: hidden;}
+</style>
+""", unsafe_allow_html=True)
+
+# Hide the header (including GitHub, Share, etc.)
+st.markdown("""
+<style>
+header[data-testid="stHeader"] {visibility: hidden;}
+</style>
+""", unsafe_allow_html=True)
+
 
 # Title
 st.title("Store Map Dashboard")
